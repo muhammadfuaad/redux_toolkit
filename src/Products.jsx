@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { add } from "./store/cartSlice";
-import store from "./store/store";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 const Products = () => {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
@@ -22,12 +22,16 @@ const Products = () => {
   const handleAdd = (product) => {
     dispatch(add(product));
   };
+  const handleAddAll = (products) => {
+    dispatch(add(products));
+  };
   const items = useSelector((state) => state.cart);
   return (
     <div>
       <h1>Products List</h1>
-      <h3>cart size: {items.length}</h3>
-      <h3>View Cart: {items.map((item) => item.title)}</h3>
+      <h3><span className="font-bold">Cart Size:</span> {items.length}</h3>
+      <h3><span className="font-bold">View Cart:</span> {items.map((item) => item.title)}</h3>
+      <button className="bg-blue-600 text-white" onClick={() => handleAddAll(products)}>Add all products to cart</button>
       <div className="product_container">
         {products.map((product) => (
           <div className="card" key={product.id}>

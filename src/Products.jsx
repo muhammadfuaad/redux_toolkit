@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { add, addAll, remove } from "./store/cartSlice";
+import { add, addAll, remove } from "./store/mySlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import productData from "./Products.json";
@@ -16,9 +16,11 @@ const Products = () => {
       // console.log(data);
       // setProducts(data);
       // alert(products);
+      // the above code taked the dat from third party API
 
       console.log(productData); // Just for verification
       setProducts(productData);
+      // this code takes the products data from a local json file
     };
     fetchProducts();
   }, []);

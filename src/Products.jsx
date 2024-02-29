@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { add, addAll, remove } from "./store/mySlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import productData from "./Products.json";
 
 const Products = () => {

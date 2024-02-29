@@ -24,8 +24,9 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const handleAdd = (product) => {
-    dispatch(addToCart(product));
+  const handleAdd = (availableItem) => {
+    dispatch(addToCart(availableItem));
+    dispatch(removeFromProducts(availableItem));
   };
   const handleAddAll = (products) => {
     dispatch(addAll(products));
@@ -52,14 +53,14 @@ const Products = () => {
       </div>
       {/* <button className="bg-blue-600 text-white" onClick={() => handleAddAll(products)}>Add all products to cart</button> */}
       <div className="product_container">
-        {availableItems.map((product) => (
-          <div className="card" key={product.id}>
-            <h4>{product.title}</h4>
-            <img src={product.image} className="product_img w-full" alt={product.title} />
-            <h4>Price: {product.price}</h4>
-            {product.quantity && <div><span>Available articles:</span> {product.quantity}</div>}
+        {availableItems.map((availableItem) => (
+          <div className="card" key={availableItem.id}>
+            <h4>{availableItem.title}</h4>
+            <img src={availableItem.image} className="product_img w-full" alt={availableItem.title} />
+            <h4>Price: {availableItem.price}</h4>
+            {availableItem.quantity && <div><span>Available articles:</span> {availableItem.quantity}</div>}
 
-            <button onClick={() => handleAdd(product)}>Add to cart</button>
+            <button onClick={() => handleAdd(availableItem)}>Add to cart</button>
           </div>
         ))}
       </div>

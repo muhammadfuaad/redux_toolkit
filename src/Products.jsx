@@ -34,13 +34,16 @@ const Products = () => {
   const handleRemove = (item) => {
     dispatch(remove(item));
   }
-  const items = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart);
+  const availableItems = useSelector((state) => state.product);
+
   return (
     <div>
       <h1>Products List</h1>
-      <h3><span className="font-bold">Cart Size:</span> {items.length}</h3>
+      <p>{availableItems.length}</p>
+      <h3><span className="font-bold">Cart Size:</span> {cartItems.length}</h3>
       <div><span className="font-bold">View Cart:</span> 
-        {items.map((item, index) => 
+        {cartItems.map((item, index) => 
           <div id="cart_item">
             <div><span>{index+1}) Produt:</span> {item.title}</div>
             <div><span>Price:</span> {item.price}</div>
@@ -48,9 +51,9 @@ const Products = () => {
           </div>
         )}
       </div>
-      <button className="bg-blue-600 text-white" onClick={() => handleAddAll(products)}>Add all products to cart</button>
+      {/* <button className="bg-blue-600 text-white" onClick={() => handleAddAll(products)}>Add all products to cart</button> */}
       <div className="product_container">
-        {products.map((product) => (
+        {availableItems.map((product) => (
           <div className="card" key={product.id}>
             <h4>{product.title}</h4>
             <img src={product.image} className="product_img w-full" alt={product.title} />

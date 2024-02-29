@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { add, addAll, remove } from "./store/mySlice";
+import { addToCart, addAll, removeFromCart, addToProducts, removeFromProducts } from "./store/mySlice";
 import { useDispatch, useSelector } from "react-redux";
 import productData from "./Products.json";
 
@@ -25,13 +25,13 @@ const Products = () => {
   }, []);
 
   const handleAdd = (product) => {
-    dispatch(add(product));
+    dispatch(addToCart(product));
   };
   const handleAddAll = (products) => {
     dispatch(addAll(products));
   };
   const handleRemove = (item) => {
-    dispatch(remove(item));
+    dispatch(removeFromCart(item));
   }
   const cartItems = useSelector((state) => state.cart);
   const availableItems = useSelector((state) => state.product);

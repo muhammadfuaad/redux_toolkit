@@ -58,7 +58,7 @@ const Products = () => {
             <h4>{availableItem.title}</h4>
             <img src={availableItem.image} className="product_img w-full" alt={availableItem.title} />
             <h4>Price: {availableItem.price}</h4>
-            {availableItem.quantity && <div><span>Available articles:</span> {availableItem.quantity}</div>}
+            {availableItem.availableQuantity && <div><span>Available articles:</span> {availableItem.availableQuantity}</div>}
 
             <button onClick={() => handleAdd(availableItem)}>Add to cart</button>
           </div>

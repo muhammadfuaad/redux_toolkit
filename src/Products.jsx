@@ -17,16 +17,20 @@ const Products = () => {
       // alert(products);
       // the above code taked the dat from third party API
 
-      console.log(productData); // Just for verification
-      setProducts(productData);
+      // console.log(productData); // Just for verification
+      // setProducts(productData);
       // this code takes the products data from a local json file
     };
     fetchProducts();
   }, []);
 
   const handleAdd = (availableItem) => {
-    dispatch(addToCart(availableItem));
-    dispatch(removeFromProducts(availableItem));
+    if (availableItem.availableQuantity > 0) {
+      dispatch(addToCart(availableItem));
+      dispatch(removeFromProducts(availableItem));
+    } else {
+      alert("This product is out of stock.")
+    }
   };
   const handleAddAll = (products) => {
     dispatch(addAll(products));
@@ -45,7 +49,7 @@ const Products = () => {
       <div><span className="font-bold">View Cart:</span> 
         {cartItems.map((item, index) => 
           <div id="cart_item">
-            <div><span>{index+1}) Produt:</span> {item.title}</div>
+            <div><span>{index+1}) Produt:</span> {item.title}({item.cartQuantity})</div>
             <div><span>Price:</span> {item.price}</div>
             <button onClick={()=>{handleRemove(item)}}>Remove</button>
           </div>
@@ -58,7 +62,7 @@ const Products = () => {
             <h4>{availableItem.title}</h4>
             <img src={availableItem.image} className="product_img w-full" alt={availableItem.title} />
             <h4>Price: {availableItem.price}</h4>
-            {availableItem.availableQuantity && <div><span>Available articles:</span> {availableItem.availableQuantity}</div>}
+            {(availableItem.availableQuantity > 0) && <div><span>Available articles:</span> {availableItem.availableQuantity}</div>}
 
             <button onClick={() => handleAdd(availableItem)}>Add to cart</button>
           </div>

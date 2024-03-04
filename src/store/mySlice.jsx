@@ -6,24 +6,38 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       if(state.length == 0) {
-       console.log("if condition triggered");
+        console.log("1st");
 
-        state.push(action.payload);
-
+        const updatedPayload = {
+          ...action.payload,
+          cartQuantity: action.payload.cartQuantity + 1
+        };
+  
+      // Push the updated payload into state
+        state.push(updatedPayload);
+        
       } else {
-        console.log("else condition triggered");
+        console.log("3rd");
 
         state.map((product)=>{
           if (product.id == action.payload.id) {
-            console.log("inner if triggered");
+            console.log("4th");
+            console.log("product.cartQuantity:", product.cartQuantity);
             return {
               ...product,
               cartQuantity: product.cartQuantity + 1
             };
             
           } else {
-            console.log("inner else triggered");
-            return state.push(action.payload)
+            console.log("5th");
+            const updatedPayload = {
+              ...action.payload,
+              cartQuantity: action.payload.cartQuantity + 1
+            };
+      
+          // Push the updated payload into state
+            state.push(updatedPayload);
+            
           }
         })
       }
